@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+### Dependencies
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+https://mui.com/x/introduction/
+https://headlessui.com/
+https://tailwindui.com/components#product-application-ui
 
 ## Available Scripts
 

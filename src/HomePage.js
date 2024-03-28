@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
-import {
-  blueberryTwilightPalette,
-  mangoFusionPalette,
-  cheerfulFiestaPalette,
-} from '@mui/x-charts/colorPalettes';
+import { mangoFusionPalette } from '@mui/x-charts/colorPalettes';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = ({ data }) => {
+  const navigate = useNavigate();
+  
   const [totalUsers, setTotalUser] = useState(0);
   const [interviewCounts, setInterviewCounts] = useState({
     'first': 0,
@@ -44,10 +43,6 @@ const HomePage = ({ data }) => {
     'seventh': 0,
   });
   
-  const navigateToNewPage = () => {
-    // history.push('/newpage', { data });
-  };
-
   useEffect(() => {
     setTotalUser(data.length);
     // Initialize a new object with the same structure as interviewCounts
@@ -67,7 +62,7 @@ const HomePage = ({ data }) => {
       } else if (interviewCount >= 21 && interviewCount <= 25) {
         newInterviewCounts.sixth++;
       } else {
-        console.log("🚀 ~ useEffect ~ default:", 'default');
+        console.log("🚀 ~ useEffect ~ interview:", item.email + newInterviewCounts);
       }
     });
     setInterviewCounts(newInterviewCounts);
@@ -84,14 +79,14 @@ const HomePage = ({ data }) => {
         newTopicCounts.third++;
       } else if (topicsCount > 20 && topicsCount <= 30) {
         newTopicCounts.fourth++;
-      } else if (topicsCount > 36 && topicsCount <= 40) {
+      } else if (topicsCount > 30 && topicsCount <= 40) {
         newTopicCounts.fifth++;
       } else if (topicsCount > 40 && topicsCount <= 50) {
         newTopicCounts.sixth++;
       }else if (topicsCount > 50) {
         newTopicCounts.seventh++;
       } else {
-        console.log("🚀 ~ useEffect ~ default:", 'default');
+        console.log("🚀 ~ useEffect ~ topics:", item.email + newTopicCounts);
       }
     });
     setTopicCounts(newTopicCounts);
@@ -108,14 +103,14 @@ const HomePage = ({ data }) => {
         newContentCounts.third++;
       } else if (contentCount > 20 && contentCount <= 30) {
         newContentCounts.fourth++;
-      } else if (contentCount > 36 && contentCount <= 40) {
+      } else if (contentCount > 30 && contentCount <= 40) {
         newContentCounts.fifth++;
       } else if (contentCount > 40 && contentCount <= 50) {
         newContentCounts.sixth++;
       }else if (contentCount > 50) {
         newContentCounts.seventh++;
       } else {
-        console.log("🚀 ~ useEffect ~ default:", 'default');
+        console.log("🚀 ~ useEffect ~ contents:", item.email + newContentCounts);
       }
     });
     setContentCounts(newContentCounts);
@@ -132,19 +127,27 @@ const HomePage = ({ data }) => {
         newDraftCounts.third++;
       } else if (draftCount > 20 && draftCount <= 30) {
         newDraftCounts.fourth++;
-      } else if (draftCount > 36 && draftCount <= 40) {
+      } else if (draftCount > 30 && draftCount <= 40) {
         newDraftCounts.fifth++;
       } else if (draftCount > 40 && draftCount <= 50) {
         newDraftCounts.sixth++;
       }else if (draftCount > 50) {
         newDraftCounts.seventh++;
       } else {
-        console.log("🚀 ~ useEffect ~ default:", 'default');
+        console.log("🚀 ~ useEffect ~ drafts:", item.email + draftCount);
       }
     });
     setDraftCounts(newDraftCounts);
 
   }, [data]);
+
+  const navigateToNewPage = (email, topics) => {
+    console.log("🚀 ~ navigateToNewPage ~ email, topics:", email, topics)
+    navigate('/topics', { state: { 
+      email: email,
+      topics: topics
+     } });
+  };
 
   return (
     <div>
@@ -261,7 +264,7 @@ const HomePage = ({ data }) => {
             <div className="hidden shrink-0 sm:flex sm:items-end button-container space-x-4">
                 <button 
                   className="px-4 py-2 bg-blue-500 text-white rounded"
-                  onClick={navigateToNewPage}
+                  onClick={ () => navigateToNewPage(item.email, item.topics) }
                 >Topic Ideas</button>
                 <button className="px-4 py-2 bg-blue-500 text-white rounded">Onboarding Interview</button>
                 <button className="px-4 py-2 bg-blue-500 text-white rounded">Drafts to Content</button>
