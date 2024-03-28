@@ -255,19 +255,17 @@ const HomePage = ({ data }) => {
       </div>
       <br/>
       <br/>
-      <ul role="list" className="divide-y divide-gray-100">
+      <ul role="list" className="divide-y divide-gray-400">
         {data.map((item, index) => (
           <li key={item.email} className="flex justify-between gap-x-6 py-5">
-            <div className="flex min-w-0 gap-x-4">
-              <div className="min-w-0 flex-auto">
-                <p className="text-sm font-semibold leading-6 text-gray-900">{item.email}</p>
-                <p className="text-sm leading-5 text-gray-500">Interview Answers: {item.interview?.filter((pair) => pair.answer !== undefined).length ?? 0}</p>
-                <p className="text-sm leading-5 text-gray-500">Topics: {item.topics?.length ?? 0}</p>
-                <p className="text-sm leading-5 text-gray-500">Drafts: {Object.values(item.drafts ?? {}).length ?? 0}</p>
-                <p className="text-sm leading-5 text-gray-500">Content: {Object.values(item.content ?? {}).length ?? 0}</p>
-              </div>
+            <div className="min-w-0 flex-auto">
+              <p className="text-sm font-semibold leading-6 text-gray-900">{item.email}</p>
+              <p className="text-sm leading-5 text-gray-500">Interview Answers: {item.interview?.filter((pair) => pair.answer !== undefined).length ?? 0}</p>
+              <p className="text-sm leading-5 text-gray-500">Topics: {item.topics?.length ?? 0}</p>
+              <p className="text-sm leading-5 text-gray-500">Drafts: {Object.values(item.drafts ?? {}).length ?? 0}</p>
+              <p className="text-sm leading-5 text-gray-500">Content: {Object.values(item.content ?? {}).length ?? 0}</p>
             </div>
-            <div className="hidden shrink-0 sm:flex sm:items-end button-container space-x-4">
+            <div className="button-container space-x-4">
                 <button 
                   className="px-4 py-2 bg-blue-500 text-white rounded"
                   onClick={ () => navigateToTopics(item.email, item.topics) }
