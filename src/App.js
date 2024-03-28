@@ -10,6 +10,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import TopicsPage from './TopicsPage';
+import InterviewPage from './InterviewPage';
 
 const user = {
   name: 'Tom Cook',
@@ -227,8 +228,9 @@ function App() {
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <Router>
               <Routes>
-                <Route path="/" element={ <HomePage data={data} /> } />
-                <Route path="/topics" element={ <TopicsPage /> } />
+                <Route path="/" element={ <HomePage data={ data } /> } />
+                <Route path="/topics" element={ <TopicsPage/> } />
+                <Route path="/interview" element={ <InterviewPage /> } />
               </Routes>
             </Router>
           </div>

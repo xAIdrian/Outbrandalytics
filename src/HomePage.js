@@ -141,13 +141,19 @@ const HomePage = ({ data }) => {
 
   }, [data]);
 
-  const navigateToNewPage = (email, topics) => {
-    console.log("🚀 ~ navigateToNewPage ~ email, topics:", email, topics)
+  const navigateToTopics = (email, topics) => {
     navigate('/topics', { state: { 
       email: email,
       topics: topics
      } });
   };
+
+  const navigateToInterview = (email, interview) => {
+    navigate('/interview', { state: { 
+      email: email,
+      interview: interview
+     } });
+  } 
 
   return (
     <div>
@@ -264,9 +270,12 @@ const HomePage = ({ data }) => {
             <div className="hidden shrink-0 sm:flex sm:items-end button-container space-x-4">
                 <button 
                   className="px-4 py-2 bg-blue-500 text-white rounded"
-                  onClick={ () => navigateToNewPage(item.email, item.topics) }
+                  onClick={ () => navigateToTopics(item.email, item.topics) }
                 >Topic Ideas</button>
-                <button className="px-4 py-2 bg-blue-500 text-white rounded">Onboarding Interview</button>
+                <button 
+                  className="px-4 py-2 bg-blue-500 text-white rounded"
+                  onClick={ () => navigateToInterview(item.email, item.interview) }
+                >Onboarding Interview</button>
                 <button className="px-4 py-2 bg-blue-500 text-white rounded">Drafts to Content</button>
             </div>
           </li>

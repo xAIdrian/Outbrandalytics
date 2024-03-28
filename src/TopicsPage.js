@@ -7,8 +7,7 @@ const TopicsPage = ({ userDataTopics }) => {
 
   return (
     <div>
-      <strong>Topics for {userData?.email}</strong>
-      <p>Welcome to the home page!</p>
+      <h1 className="text-2xl font-semibold leading-6 text-orange-900">Topics for {userData?.email}</h1>
 
       <ul role="list" className="divide-y divide-gray-100">
         {userData.topics?.map((item, index) => (
