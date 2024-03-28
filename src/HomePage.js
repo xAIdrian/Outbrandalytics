@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
-// import { useHistory } from 'react-router-dom';
+import {
+  blueberryTwilightPalette,
+  mangoFusionPalette,
+  cheerfulFiestaPalette,
+} from '@mui/x-charts/colorPalettes';
 
 const HomePage = ({ data }) => {
   const [totalUsers, setTotalUser] = useState(0);
@@ -152,10 +156,11 @@ const HomePage = ({ data }) => {
           <h3 className="text-2xl font-semibold leading-6 text-gray-900">Interview Completion</h3>
           <p className="text-sm leading-5 text-gray-500">Overview of all users</p>
           <PieChart
+            colors={ mangoFusionPalette }
             series={[
               {
                 data: [
-                  { id: 0, value: interviewCounts.first, label: '0 answers' },
+                  { id: 0, value: interviewCounts.first, label: '0 answers', color: 'lightgrey'},
                   { id: 1, value: interviewCounts.second, label: '1 - 5 answers' },
                   { id: 2, value: interviewCounts.third, label: '6 - 10 answers' },
                   { id: 3, value: interviewCounts.fourth, label: '11 - 15 answers' },
@@ -172,16 +177,17 @@ const HomePage = ({ data }) => {
           <h3 className="text-2xl font-semibold leading-6 text-gray-900">Topics Generated</h3>
           <p className="text-sm leading-5 text-gray-500">Topics generated 5 at a time</p>
           <PieChart
+            colors={ mangoFusionPalette }
             series={[
               {
                 data: [
-                  { id: 0, value: topicCounts.first, label: '0 topics' },
+                  { id: 0, value: topicCounts.first, label: '0 topics', color: 'lightgrey' },
                   { id: 1, value: topicCounts.second, label: '1 - 10 topics' },
                   { id: 2, value: topicCounts.third, label: '11 - 20 topics' },
                   { id: 3, value: topicCounts.fourth, label: '21 - 30 topics' },
                   { id: 4, value: topicCounts.fifth, label: '31 - 40 topics' },
                   { id: 5, value: topicCounts.sixth, label: '41 - 50 topics' },
-                  { id: 6, value: topicCounts.seventh, label: '51+ topics', color: 'red'},
+                  { id: 6, value: topicCounts.seventh, label: '51+ topics' },
                 ],
               },
             ]}
@@ -195,18 +201,19 @@ const HomePage = ({ data }) => {
       <div className='flex justify-between'>
         <div>
           <h3 className="text-2xl font-semibold leading-6 text-gray-900">Content Created</h3>
-          <p className="text-sm leading-5 text-gray-500">Overview of all content types. 3 tweets = 1 content.</p>
+          <p className="text-sm leading-5 text-gray-500">All content types. 3 tweets = 1 content.</p>
           <PieChart
+            colors={ mangoFusionPalette }
             series={[
               {
                 data: [
-                  { id: 0, value: contentCounts.first, label: '0 posts' },
+                  { id: 0, value: contentCounts.first, label: '0 posts', color: 'lightgrey'},
                   { id: 1, value: contentCounts.second, label: '1 - 10 posts' },
                   { id: 2, value: contentCounts.third, label: '11 - 20 posts' },
                   { id: 3, value: contentCounts.fourth, label: '21 - 30 posts' },
                   { id: 4, value: contentCounts.fifth, label: '31 - 40 posts' },
                   { id: 5, value: contentCounts.sixth, label: '41 - 50 posts' },
-                  { id: 6, value: contentCounts.seventh, label: '51+ posts', color: 'red'},
+                  { id: 6, value: contentCounts.seventh, label: '51+ posts' },
                 ],
               },
             ]}
@@ -218,10 +225,11 @@ const HomePage = ({ data }) => {
           <h3 className="text-2xl font-semibold leading-6 text-gray-900">Drafts For Content</h3>
           <p className="text-sm leading-5 text-gray-500">Drafts are used to generate Content</p>
           <PieChart
+            colors={ mangoFusionPalette }
             series={[
               {
                 data: [
-                  { id: 0, value: draftCounts.first, label: '0 drafts' },
+                  { id: 0, value: draftCounts.first, label: '0 drafts', color: 'lightgrey'},
                   { id: 1, value: draftCounts.second, label: '1 - 10 drafts' },
                   { id: 2, value: draftCounts.third, label: '11 - 20 drafts' },
                   { id: 3, value: draftCounts.fourth, label: '21 - 30 drafts' },
@@ -239,50 +247,28 @@ const HomePage = ({ data }) => {
       <br/>
       <br/>
       <ul role="list" className="divide-y divide-gray-100">
-      {data.map((item, index) => (
-        <li key={item.email} className="flex justify-between gap-x-6 py-5">
-          <div className="flex min-w-0 gap-x-4">
-            <div className="min-w-0 flex-auto">
-              <p className="text-sm font-semibold leading-6 text-gray-900">{item.email}</p>
-              <p className="text-sm leading-5 text-gray-500">Interview Answers: {item.interview?.filter((pair) => pair.answer !== undefined).length ?? 0}</p>
-              <p className="text-sm leading-5 text-gray-500">Topics: {item.topics?.length ?? 0}</p>
-              <p className="text-sm leading-5 text-gray-500">Drafts: {Object.values(item.drafts ?? {}).length ?? 0}</p>
-              <p className="text-sm leading-5 text-gray-500">Content: {Object.values(item.content ?? {}).length ?? 0}</p>
+        {data.map((item, index) => (
+          <li key={item.email} className="flex justify-between gap-x-6 py-5">
+            <div className="flex min-w-0 gap-x-4">
+              <div className="min-w-0 flex-auto">
+                <p className="text-sm font-semibold leading-6 text-gray-900">{item.email}</p>
+                <p className="text-sm leading-5 text-gray-500">Interview Answers: {item.interview?.filter((pair) => pair.answer !== undefined).length ?? 0}</p>
+                <p className="text-sm leading-5 text-gray-500">Topics: {item.topics?.length ?? 0}</p>
+                <p className="text-sm leading-5 text-gray-500">Drafts: {Object.values(item.drafts ?? {}).length ?? 0}</p>
+                <p className="text-sm leading-5 text-gray-500">Content: {Object.values(item.content ?? {}).length ?? 0}</p>
+              </div>
             </div>
-          </div>
-          <div className="hidden shrink-0 sm:flex sm:items-end button-container space-x-4">
-              <button 
-                className="px-4 py-2 bg-blue-500 text-white rounded"
-                onClick={navigateToNewPage}
-              >Topic Ideas</button>
-              <button className="px-4 py-2 bg-blue-500 text-white rounded">Onboarding Interview</button>
-              <button className="px-4 py-2 bg-blue-500 text-white rounded">Drafts to Content</button>
-          </div>
-        </li>
-      ))}
-    </ul>
-      {/* <table>
-        <thead>
-          <tr>
-            <th>
-            </th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, index) => (
-            <tr key={index}>
-              <td>{item.email}</td>
-              <td className="button-container space-x-4">
-                <button className="px-4 py-2 bg-blue-500 text-white rounded">Initial Interview</button>
-                <button className="px-4 py-2 bg-blue-500 text-white rounded">Topics</button>
-                <button className="px-4 py-2 bg-blue-500 text-white rounded">Drafts</button>
-                <button className="px-4 py-2 bg-blue-500 text-white rounded">Content</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
+            <div className="hidden shrink-0 sm:flex sm:items-end button-container space-x-4">
+                <button 
+                  className="px-4 py-2 bg-blue-500 text-white rounded"
+                  onClick={navigateToNewPage}
+                >Topic Ideas</button>
+                <button className="px-4 py-2 bg-blue-500 text-white rounded">Onboarding Interview</button>
+                <button className="px-4 py-2 bg-blue-500 text-white rounded">Drafts to Content</button>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
