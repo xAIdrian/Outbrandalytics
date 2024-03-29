@@ -155,6 +155,16 @@ const HomePage = ({ data }) => {
      } });
   } 
 
+  const navigateToDraftContent = (email, drafts, content) => {
+    if (drafts !== undefined && content !== undefined) {
+      navigate('/draft-to-content', { state: { 
+        email: email,
+        drafts: drafts,
+        content: content
+      } });
+    }
+  };
+
   return (
     <div>
       <h3 className="text-2xl font-semibold leading-6 text-gray-900">Total Users: { totalUsers }</h3>
@@ -274,7 +284,10 @@ const HomePage = ({ data }) => {
                   className="px-4 py-2 bg-blue-500 text-white rounded"
                   onClick={ () => navigateToInterview(item.email, item.interview) }
                 >Onboarding Interview</button>
-                <button className="px-4 py-2 bg-blue-500 text-white rounded">Drafts to Content</button>
+                <button 
+                  className="px-4 py-2 bg-blue-500 text-white rounded"
+                  onClick={ () => navigateToDraftContent(item.email, item.drafts, item.content) }
+                >Drafts to Content</button>
             </div>
           </li>
         ))}

@@ -11,6 +11,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import TopicsPage from './TopicsPage';
 import InterviewPage from './InterviewPage';
+import DraftContentPage from './DraftContentPage';
 
 const user = {
   name: 'Tom Cook',
@@ -45,7 +46,6 @@ function App() {
         get(child(dbRef, `users`)).then((snapshot) => {
           if (snapshot.exists()) {
             const snap = snapshot.val();
-            console.log(snap);
 
             //get the values from list as an array
             const snapArray = Object.values(snap);
@@ -231,6 +231,7 @@ function App() {
                 <Route path="/" element={ <HomePage data={ data } /> } />
                 <Route path="/topics" element={ <TopicsPage/> } />
                 <Route path="/interview" element={ <InterviewPage /> } />
+                <Route path="/draft-to-content" element={ <DraftContentPage /> } />
               </Routes>
             </Router>
           </div>
